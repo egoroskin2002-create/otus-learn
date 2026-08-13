@@ -1,0 +1,75 @@
+1)
+139653	Harry Potter and the Half-Blood Prince	Fantasy
+139653	Harry Potter and the Half-Blood Prince	Thriller
+139653	Harry Potter and the Half-Blood Prince	Adventure
+139653	Harry Potter and the Half-Blood Prince	Action
+139653	Harry Potter and the Half-Blood Prince	Family
+92850	DragonBall Z	Sci-Fi
+92850	DragonBall Z	Fantasy
+92850	DragonBall Z	Action
+92850	DragonBall Z	Adventure
+92850	DragonBall Z	Comedy
+139654	Harry Potter and the Order of the Phoenix	Adventure
+139654	Harry Potter and the Order of the Phoenix	Fantasy
+139654	Harry Potter and the Order of the Phoenix	Family
+272424	Rapunzel Unbraided	Animation
+272424	Rapunzel Unbraided	Family
+2)
+21187	Arthur, the Movie	
+46855	Bridge to Terabithia	
+207459	Master of Space and Time	
+206489	Mars in Aries	
+233061	Ninth Life of Louis Drax, The	
+248530	Paradox	
+272644	Ratatouille	
+400649	"""Pacific War, The"""	
+409052	"""Turin 2006: XX Olympic Winter Games"""	
+4978	Abominable Snowman, The	
+
+3)
+Mein Weg zu Dir	210054	1	Documentary
+Mein Weg zu Dir	210054	1	Short
+Mein Weg zu Dir	210054	2	Comedy
+Mein Weg zu Dir	210054	2	Crime
+Mein Weg zu Dir	210054	5	Western
+Mein Weg zu Dir	210054	6	Comedy
+Mein Weg zu Dir	210054	6	Family
+Mein Weg zu Dir	210054	8	Animation
+Mein Weg zu Dir	210054	8	Comedy
+Mein Weg zu Dir	210054	8	Short
+
+4)
+Harry Potter and the Half-Blood Prince	139653	Thriller
+Harry Potter and the Half-Blood Prince	139653	Adventure
+Harry Potter and the Half-Blood Prince	139653	Fantasy
+Harry Potter and the Half-Blood Prince	139653	Family
+Harry Potter and the Half-Blood Prince	139653	Action
+DragonBall Z	92850	Sci-Fi
+DragonBall Z	92850	Comedy
+DragonBall Z	92850	Fantasy
+DragonBall Z	92850	Adventure
+DragonBall Z	92850	Action
+
+5)
+'Chiyaan'	Vikram
+'Doc'	Newman
+'Double Duty'	Radcliffe
+'J.G.' Jim	Grant
+'Mama' Cass	Elliot
+'Pepsi'	Vijayan
+'Pops' A.	Willoughby
+'Stuttering' John	Melendez
+A	Martinez
+A'da Alison	Woolfolk
+
+6)
+"""Pacific War, The"""
+"""Turin 2006: XX Olympic Winter Games"""
+Arthur, the Movie
+Bridge to Terabithia
+Mars in Aries
+Master of Space and Time
+Ninth Life of Louis Drax, The
+Paradox
+Ratatouille
+"""American Dad"""
