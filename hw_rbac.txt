@@ -1,0 +1,124 @@
+CREATE USER jhon IDENTIFIED BY 'qwerty';
+
+CREATE ROLE devs;
+
+GRANT SELECT ON *.* TO devs;
+
+GRANT devs TO jhon
+
+
+SELECT *
+FROM system.users
+
+Query id: e2d64ccf-483b-4a65-b2e9-84e7edfd827b
+
+Row 1:
+──────
+name:                 default
+id:                   94309d50-4f52-5250-31bd-74fecac179db
+storage:              users_xml
+auth_type:            ['plaintext_password']
+auth_params:          ['{}']
+valid_until:          ['1970-01-01 00:00:00']
+host_ip:              ['::/0']
+host_names:           []
+host_names_regexp:    []
+host_names_like:      []
+default_roles_all:    1
+default_roles_list:   []
+default_roles_except: []
+grantees_any:         1
+grantees_list:        []
+grantees_except:      []
+default_database:
+
+Row 2:
+──────
+name:                 jhon
+id:                   254dc978-4286-fdb4-ba8e-db5ee92a16af
+storage:              local_directory
+auth_type:            ['sha256_password']
+auth_params:          ['{}']
+valid_until:          ['1970-01-01 00:00:00']
+host_ip:              []
+host_names:           ['localhost']
+host_names_regexp:    []
+host_names_like:      []
+default_roles_all:    1
+default_roles_list:   []
+default_roles_except: []
+grantees_any:         1
+grantees_list:        []
+grantees_except:      []
+default_database:
+
+SELECT
+    name,
+    auth_type,
+    host_ip,
+    host_names
+FROM system.users
+WHERE name = 'jhon'
+
+Query id: 1a9c1e12-2daf-4ef6-b225-de125088405a
+
+   ┌─name─┬─auth_type───────────┬─host_ip─┬─host_names────┐
+1. │ jhon │ ['sha256_password'] │ []      │ ['localhost'] │
+   └──────┴─────────────────────┴─────────┴───────────────┘
+   
+SELECT
+    name,
+    id,
+    storage
+FROM system.roles
+WHERE name = 'devs'
+
+Query id: cae1d783-cf18-4c45-a929-6960b2b1e196
+
+   ┌─name─┬─id───────────────────────────────────┬─storage─────────┐
+1. │ devs │ a941e295-df88-8728-53fb-028c14b5859e │ local_directory │
+   └──────┴──────────────────────────────────────┴─────────────────┘
+   
+SELECT *
+FROM system.grants
+
+Query id: 709ecfe4-65ec-4ac7-8fda-4ef87934c82b
+
+   ┌─user_name─┬─role_name─┬─access_type─┬─access_object─┬─database─┬─table─┬─column─┬─is_partial_revoke─┬─grant_option─┬─is_wildcard─┐
+1. │ default   │ ᴺᵁᴸᴸ      │ ALL         │               │ ᴺᵁᴸᴸ     │ ᴺᵁᴸᴸ  │ ᴺᵁᴸᴸ   │                 0 │            1 │           0 │
+2. │ ᴺᵁᴸᴸ      │ devs      │ SELECT      │               │ ᴺᵁᴸᴸ     │ ᴺᵁᴸᴸ  │ ᴺᵁᴸᴸ   │                 0 │            0 │           0 │
+   └───────────┴───────────┴─────────────┴───────────────┴──────────┴───────┴────────┴───────────────────┴──────────────┴─────────────┘
+   
+   SELECT role_name, access_type, database, table
+FROM system.grants
+WHERE role_name = 'devs';
+
+SELECT
+    role_name,
+    access_type,
+    database,
+    `table`
+FROM system.grants
+WHERE role_name = 'devs'
+
+Query id: 29f0b4b7-76e4-4134-9ceb-2a83e83f797d
+
+   ┌─role_name─┬─access_type─┬─database─┬─table─┐
+1. │ devs      │ SELECT      │ ᴺᵁᴸᴸ     │ ᴺᵁᴸᴸ  │
+   └───────────┴─────────────┴──────────┴───────┘
+   
+SELECT user_name, granted_role_name
+FROM system.role_grants
+WHERE user_name = 'jhon';
+
+SELECT
+    user_name,
+    granted_role_name
+FROM system.role_grants
+WHERE user_name = 'jhon'
+
+Query id: 2f8e4cc9-5176-4d98-9c25-8b2c842b45ca
+
+   ┌─user_name─┬─granted_role_name─┐
+1. │ jhon      │ devs              │
+   └───────────┴───────────────────┘
