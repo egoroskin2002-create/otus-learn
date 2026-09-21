@@ -1,0 +1,44 @@
+[0d9f12c8f1e7] 2026.09.21 11:51:37.779873 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Debug> executeQuery: (from 127.0.0.1:38286, user: user) EXPLAIN indexes = 1 SELECT count(), sum(like_count) FROM youtube_dislikes WHERE upload_date >= '2021-01-01' AND upload_date <= '2021-12-31'; (stage: Complete)
+[0d9f12c8f1e7] 2026.09.21 11:51:37.781301 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> InterpreterSelectQuery: The min valid primary key position for moving to the tail of PREWHERE is 0
+[0d9f12c8f1e7] 2026.09.21 11:51:37.781393 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Debug> InterpreterSelectQuery: MergeTreeWhereOptimizer: condition "(upload_date >= '2021-01-01') AND (upload_date <= '2021-12-31')" moved to PREWHERE
+[0d9f12c8f1e7] 2026.09.21 11:51:37.782839 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> ContextAccess (user): Access granted: SELECT(upload_date, like_count) ON default.youtube_dislikes
+[0d9f12c8f1e7] 2026.09.21 11:51:37.783007 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> InterpreterSelectQuery: FetchColumns -> Complete
+[0d9f12c8f1e7] 2026.09.21 11:51:37.784945 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Debug> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Key condition: (column 0 in ['2021-01-01', +Inf)), (column 0 in (-Inf, '2021-12-31']), and
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787421 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Running binary search on index range for part all_1_6_1 (238 marks)
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787414 [ 668 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Running binary search on index range for part all_7_12_1 (236 marks)
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787531 [ 715 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Running binary search on index range for part all_19_19_0 (38 marks)
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787605 [ 668 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (LEFT) boundary mark: 185
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787701 [ 668 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (RIGHT) boundary mark: 186
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787757 [ 668 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found continuous range in 13 steps
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787644 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (LEFT) boundary mark: 187
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787705 [ 715 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (LEFT) boundary mark: 29
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787826 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (RIGHT) boundary mark: 188
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787962 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found continuous range in 13 steps
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787918 [ 684 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Running binary search on index range for part all_13_18_1 (235 marks)
+[0d9f12c8f1e7] 2026.09.21 11:51:37.787844 [ 715 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (RIGHT) boundary mark: 30
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788106 [ 684 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (LEFT) boundary mark: 184
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788154 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Running binary search on index range for part all_20_20_0 (39 marks)
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788227 [ 715 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found continuous range in 8 steps
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788261 [ 684 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (RIGHT) boundary mark: 185
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788355 [ 684 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found continuous range in 13 steps
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788433 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (LEFT) boundary mark: 30
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788527 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found (RIGHT) boundary mark: 31
+[0d9f12c8f1e7] 2026.09.21 11:51:37.788609 [ 682 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Trace> default.youtube_dislikes (c6f0a07a-36cd-4472-b5d8-94e19d7b999f) (SelectExecutor): Found continuous range in 8 steps
+┌─explain────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Expression ((Projection + Before ORDER BY))                                                            │
+│   Aggregating                                                                                          │
+│     Expression (Before GROUP BY)                                                                       │
+│       ReadFromMergeTree (default.youtube_dislikes)                                                     │
+│       Indexes:                                                                                         │
+│         PrimaryKey                                                                                     │
+│           Keys:                                                                                        │
+│             upload_date                                                                                │
+│           Condition: and((upload_date in (-Inf, '2021-12-31']), (upload_date in ['2021-01-01', +Inf))) │
+│           Parts: 5/5                                                                                   │
+│           Granules: 5/781                                                                              │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+[0d9f12c8f1e7] 2026.09.21 11:51:37.791325 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Debug> executeQuery: Read 11 rows, 455.00 B in 0.011614 sec., 947.1327707938696 rows/sec., 38.26 KiB/sec.
+[0d9f12c8f1e7] 2026.09.21 11:51:37.791431 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Debug> MemoryTracker: Peak memory usage (for query): 701.94 KiB.
+[0d9f12c8f1e7] 2026.09.21 11:51:37.791469 [ 50 ] {1cc1608f-d815-4286-a437-96799a6347fb} <Debug> TCPHandler: Processed in 0.01168566 sec.
+
+11 rows in set. Elapsed: 0.011 sec.

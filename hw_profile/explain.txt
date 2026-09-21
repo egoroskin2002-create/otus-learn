@@ -1,0 +1,27 @@
+Вывод Explain запроса без фильтрации по PK:
+
+Expression ((Projection + Before ORDER BY))
+  Aggregating
+    Expression (Before GROUP BY)
+      ReadFromMergeTree (default.youtube_dislikes)
+      Indexes:
+        PrimaryKey
+          Condition: true
+          Parts: 5/5
+          Granules: 781/781
+		  
+		  
+		  
+		  
+Вывод Explain запроса с фильтрацией по PK:
+Expression ((Projection + Before ORDER BY))
+  Aggregating
+    Expression (Before GROUP BY)
+      ReadFromMergeTree (default.youtube_dislikes)
+      Indexes:
+        PrimaryKey
+          Keys: 
+            upload_date
+          Condition: and((upload_date in (-Inf, '20211231']), (upload_date in ['20210101', +Inf)))
+          Parts: 5/5
+          Granules: 166/781
