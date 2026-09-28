@@ -1,0 +1,6 @@
+docker compose up -d 
+docker compose exec clickhouse clickhouse-client
+docker compose exec clickhouse-backup clickhouse-backup create_remote --tables='homework.*' ch_homework_backup
+docker compose exec clickhouse-backup clickhouse-backup list remote
+docker compose exec clickhouse clickhouse-client
+docker compose exec clickhouse-backup clickhouse-backup restore_remote --rm --tables='homework.*' ch_homework_backup
