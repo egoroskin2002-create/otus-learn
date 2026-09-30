@@ -1,0 +1,107 @@
+version: '3'
+services:
+  clickhouse1:
+    image: clickhouse/clickhouse-server:23.8
+    container_name: clickhouse1
+    ports:
+      - "18123:8123"
+      - "19000:9000"
+    environment:
+      - CLICKHOUSE_USER=user
+      - CLICKHOUSE_PASSWORD=pass
+      - CLICKHOUSE_CLUSTER=cluster
+      - CLICKHOUSE_SHARD=1
+      - CLICKHOUSE_REPLICA=1
+    volumes:
+      - ./data1:/var/lib/clickhouse
+      - ./logs1:/var/log/clickhouse-server
+      - ./config:/etc/clickhouse-server/config.d
+      - ./users.d:/etc/clickhouse-server/users.d
+    networks:
+      - ch-network
+
+  clickhouse2:
+    image: clickhouse/clickhouse-server:23.8
+    container_name: clickhouse2
+    ports:
+      - "18124:8123"
+      - "19001:9000"
+    environment:
+      - CLICKHOUSE_USER=user
+      - CLICKHOUSE_PASSWORD=pass
+      - CLICKHOUSE_CLUSTER=cluster
+      - CLICKHOUSE_SHARD=2
+      - CLICKHOUSE_REPLICA=1
+    volumes:
+      - ./data2:/var/lib/clickhouse
+      - ./logs2:/var/log/clickhouse-server
+    networks:
+      - ch-network
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://localhost:9093
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      - zookeeper
+    networks:
+      - ch-network
+
+  zookeeper:
+    image: zookeeper:3.8
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      - ch-network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - clickhouse1
+    networks:
+      - ch-network
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - ch-network
+    depends_on:
+      - clickhouse1
+      - pushgateway
+
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: pushgateway
+    ports:
+      - "9091:9091"
+    networks:
+      - ch-network
+
+networks:
+  ch-network:
+    driver: bridge
+
+volumes:
+  grafana-data:
+  prometheus-data:
