@@ -1,0 +1,24 @@
+mkdir -p dags logs plugins data
+echo "AIRFLOW_UID=$(id -u)" > .env
+docker-compose up airflow-init
+docker-compose up -d
+docker exec -it clickhouse-server clickhouse-client
+
+SELECT *
+FROM parquet_data
+LIMIT 10
+
+Query id: a716323c-5578-4e1a-8868-67a72f43dcea
+
+← Progress: 10.00 thousand rows, 316.28 KB (1.77 million rows/s., 56.01 MB/s↖ Progress: 10.00 thousand rows, 316.28 KB (1.77 million rows/s., 56.01 MB/s    ┌─id─┬─name─────────┬─value─┬──────────created_at─┐
+ 1. │  1 │ Macchiato    │ 24.59 │ 2024-02-03 10:27:38 │
+ 2. │  2 │ Americano    │ 16.47 │ 2024-08-17 06:48:18 │
+ 3. │  3 │ Ristretto    │   5.3 │ 2024-01-30 07:53:22 │
+ 4. │  4 │ Mocha        │ 22.79 │ 2024-01-23 08:31:10 │
+ 5. │  5 │ Macchiato    │ 13.63 │ 2024-04-06 07:40:37 │
+ 6. │  6 │ Matcha Latte │  5.11 │ 2024-07-22 01:07:28 │
+ 7. │  7 │ Cappuccino   │ 23.16 │ 2024-12-27 06:36:22 │
+ 8. │  8 │ Macchiato    │  19.3 │ 2024-12-30 22:44:50 │
+ 9. │  9 │ Ristretto    │  18.7 │ 2024-01-02 08:58:44 │
+10. │ 10 │ Mocha        │ 18.17 │ 2024-12-02 05:51:11 │
+    └────┴──────────────┴───────┴─────────────────────┘
