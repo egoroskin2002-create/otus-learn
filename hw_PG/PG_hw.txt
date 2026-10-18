@@ -1,0 +1,86 @@
+///Создал таблицу test в Postgres и вставил данные
+
+CREATE TABLE public.test (
+    int_id   SERIAL PRIMARY KEY,
+    int_nullable INT NULL DEFAULT NULL,
+    float    FLOAT NOT NULL,
+    str      VARCHAR(100) NOT NULL DEFAULT '',
+    float_nullable FLOAT NULL DEFAULT NULL
+);
+
+INSERT INTO public.test (int_id, str, float) VALUES (1, 'test', 2);
+INSERT INTO public.test (int_id, str, float) VALUES (2, 'hello', 3.14);
+
+//// Еще раз потренировался в этом 
+CREATE TABLE table1 (
+    id integer primary key,
+    column1 varchar(10)
+);
+
+INSERT INTO table1 (id, column1) VALUES
+  (1, 'abc'),
+  (2, 'def');
+  
+ testdb=# select * from test;
+ int_id | int_nullable | float |  str  | float_nullable
+--------+--------------+-------+-------+----------------
+      1 |              |     2 | test  |
+      2 |              |  3.14 | hello |
+(2 rows)
+
+/// Подключился к Клику и попробовал выгрузить данные через табличную функцию:
+SELECT *
+FROM postgresql('postgres-data:5432', 'testdb', 'test', 'ch_user', 'ch_password')
+
+Query id: f412a42c-6c8d-449c-bb32-caad7b18124d
+
+   ┌─int_id─┬─int_nullable─┬─float─┬─str───┬─float_nullable─┐
+1. │      1 │         ᴺᵁᴸᴸ │     2 │ test  │           ᴺᵁᴸᴸ │
+2. │      2 │         ᴺᵁᴸᴸ │  3.14 │ hello │           ᴺᵁᴸᴸ │
+   └────────┴──────────────┴───────┴───────┴────────────────┘
+   
+/// Создал таблицу через движок PostgreSQL:
+CREATE TABLE default.pg_table
+(
+    `float_nullable` Nullable(Float32),
+    `str` String,
+    `int_id` Int32
+)
+ENGINE = PostgreSQL('postgres-data:5432', 'testdb', 'test', 'ch_user', 'ch_password')
+
+Query id: 9ab16b9e-5bf4-4ac2-bfe9-8df2e574a58a
+
+Ok.
+/// Запрос из этой таблицы:
+SELECT *
+FROM pg_table
+
+Query id: 87fc5526-2d6e-495b-85e1-64ea452733f4
+
+   ┌─float_nullable─┬─str───┬─int_id─┐
+1. │           ᴺᵁᴸᴸ │ test  │      1 │
+2. │           ᴺᵁᴸᴸ │ hello │      2 │
+   └────────────────┴───────┴────────┘
+/// Создал БД в CH для интеграции с PGSQL:
+CREATE DATABASE pg_database
+ENGINE = PostgreSQL('postgres-data:5432', 'testdb', 'ch_user', 'ch_password')
+
+Query id: 8c040e3c-8f12-4b9d-b1c7-caa3c039ad44
+
+Ok.
+
+0 rows in set. Elapsed: 0.013 sec.
+
+/// Проверил, что из клика видны таблицы в PG:
+SHOW TABLES FROM pg_database
+
+Query id: 1fc71cab-77a4-46c0-b3cd-1cd0bff1a2cb
+
+   ┌─name───┐
+1. │ table1 │
+2. │ test   │
+   └────────┘
+
+2 rows in set. Elapsed: 0.029 sec.
+
+Вроде бы всё ОК, надеюсь правильно понял суть ДЗ
